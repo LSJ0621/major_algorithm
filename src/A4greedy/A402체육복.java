@@ -6,40 +6,37 @@ import java.util.List;
 
 public class A402체육복 {
     public static void main(String[] args) {
-        int n = 3;
-        int[] lost = {3};
-        int[] reserve = {1};
-        int [] use = new int[n];
-        Arrays.fill(use,1);
-
-        for(int i=0; i<reserve.length;i++){
-            use[reserve[i]-1] = 2;
-        }
+         int n =6;
+        int[] lost = {2,4,6};
+        int[] reserve = {1,3,5,6};
+        Arrays.sort(lost);
+        Arrays.sort(reserve);
         for(int i=0;i<lost.length;i++){
-            if(use[lost[i]-1]==2){
-                use[lost[i]-1] =1;
-            } else use[lost[i]-1] = 0;
-        }
-
-        int answer =0;
-
-        for(int i=0;i<use.length;i++){
-            if(use[i]==0){
-                if(i>=1 && use[i-1]==2){
-                    use[i] =1;
-                    use[i-1] =1;
-                } else if (i<=n-2 && use[i+1]==2) {
-                    use[i] = 1;
-                    use[i+1] =1 ;
+            for(int j=0; j<reserve.length;j++){
+                if(reserve[j]==lost[i]){
+                    lost[i]=-1;
+                    reserve[j]=-1;
                 }
             }
         }
-        for(int i=0; i<use.length;i++){
-            if(use[i]>=1){
-                answer++;
+        for (int i = 0; i < lost.length; i++) {
+            for(int j=0; j<reserve.length;j++){
+                if(reserve[j]==lost[i]-1 || reserve[j]==lost[i]+1){
+                    if(reserve[j]!=-1){
+                        lost[i]=-1;
+                        reserve[j]=-1;
+                        break;
+                    }
+                }
             }
         }
-        System.out.println(Arrays.toString(use));
+        int count =0;
+        for(int i=0;i<lost.length;i++){
+            if(lost[i]!=-1){
+                count++;
+            }
+        }
+        int answer = n-count;
         System.out.println(answer);
     }
 }

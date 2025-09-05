@@ -20,7 +20,7 @@ public class A0803연결요소의개수 {
             adjList.add(new ArrayList<>());
         }
 
-        for(int i = 0; i<M; i++){
+        for(int i = 0; i<M+1; i++){
             String[] str1 = br.readLine().split(" ");
             int s = Integer.parseInt(str1[0]);
             int e = Integer.parseInt(str1[1]);
